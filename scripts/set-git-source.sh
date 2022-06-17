@@ -32,6 +32,7 @@ echo "Setting kustomization patches to ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_AP
 
 find ${SCRIPTDIR}/../0-bootstrap -name '*.yaml' -print0 |
   while IFS= read -r -d '' File; do
+    echo "found file $File"   
     if grep -q "kind: Application\|kind: AppProject" "$File"; then
       #echo "$File"
       sed -i'.bak' -e "s#\${GIT_BASEURL}/\${GIT_ORG}/\${GIT_GITOPS}#${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}#" $File
